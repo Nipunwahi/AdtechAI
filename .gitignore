@@ -1,0 +1,10 @@
+.vscode
+*.json
+*.h5
+*.pickle
+*.csv
+bigram_mod2
+*.pkl.*
+*.pkl
+SA_Model
+__pycache__

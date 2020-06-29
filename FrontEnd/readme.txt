@@ -1,0 +1,1 @@
+To run the frontend just open the index.html in a live server and it will open a webpage.

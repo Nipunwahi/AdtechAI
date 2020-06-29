@@ -1,0 +1,50 @@
+So my task was to make a model to categorize the webpage based on its content.
+So you may ask why categories , so according to OpenRTB documentation we can share 
+the categories of the webpage to SSPs so that they can give results based on that.
+So after knowing about that , we found a dataset on kaggle which has articles and 
+their categories,their title and subtitle . I tried various models on the dataset
+like SVM, Passive Aggressive Classifier etc but they all had their problems . For 
+example SVM required too much time to train the model so it might have taken more than
+a week to train 1 model on my laptop, other inbuilt models of scikit learn were not 
+that accurate also they were giving like 7-8 percent accuracy. After that sir suggested
+to use neural network models based on lstm. So i used tensorflow for that.
+The model is LSTM based neural network with 2 dense layers and it outputs a softmax 
+output. Here we are only using titles of the webpage for the classification. We tried
+with subtitles but the accuracy got a big dip due to that so currently we only use 
+title for the classification. The result is a softmax output , we were initially taking
+just the max of it and giving category according to a dictionary but after sir's recommendation
+that some things may have more than one categories he suggested me to make a metric to do that.
+He suggested using the standard deviation and max of the output vector to get the solution.
+So we are currently taking max - std and everything thats above this value is given as the output.
+So we can have 1 or more categories for the output.
+After training the model we saved it on a pickle file so that it can be used quicky and offline.
+
+Now for the basic flow of the model
+The models get the title from the webscraper.
+It parses the title through a tokenizer
+It uses glove Embeddings to embed each word to a 100d vector
+We pass this as input to the LSTM based neural network model
+We get result as a 26 dimensional vector as there are 26 categories
+Then we use a metric like max - std deviation to get one or more categories for the output.
+
+
+
+
+
+API and frontEnd
+So at the end we have 3 models doing three different things , we needed to combine them 
+for our results so they can be used simultaneously and efficiently.
+So my task was to create an API for this.
+I used Flask for the same and which takes a POST request for the input
+and returns our results. I call the predict methods of all the 3 models and 
+get the result and return it in a json format.
+
+Now for the flow of the whole project and how its all tied is here.
+The webpage can make a POST request to the API which in turn calls the webscraper
+giving it the url. The webscraper returns title and summary of the webpage which
+are used as inputs to categorization model and to extract themes also. Meanwhile 
+while scraping , the subject model finds subject and their sentiments also.
+Using the keywords of the previous model , we find sentiments on them. After that
+we return the result which can be sent to the SSPs for getting ads related to 
+the content .
+
