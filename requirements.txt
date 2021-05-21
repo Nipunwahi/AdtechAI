@@ -41,4 +41,4 @@ spacy == 2.1.0
 # Project/Categorization/base.py: 2,3,4,11
 # Project/Categorization/preprocess.py: 2,3
 # Project/subjectExt/subject_extraction.py: 12,13,14,18
-tensorflow == 2.2.0
+tensorflow == 2.5.0
