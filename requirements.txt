@@ -22,7 +22,7 @@ nltk == 3.5
 # Project/Categorization/base.py: 6,13
 # Project/LDA/lda.py: 4
 # Project/subjectExt/subject_extraction.py: 16
-numpy == 1.18.4
+numpy == 1.22.0
 
 # Project/Categorization/base.py: 5
 # Project/Categorization/preprocess.py: 1
